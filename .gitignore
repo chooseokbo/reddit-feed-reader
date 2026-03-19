@@ -1,0 +1,28 @@
+# Build
+target/
+build/
+*.jar
+*.war
+*.class
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.project
+.classpath
+.settings/
+
+# Credentials - NEVER commit these
+application.yml
+application-local.yml
+*.env
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
