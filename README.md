@@ -13,16 +13,17 @@ Saves me from jumping between subreddits manually.
 
 Requires Java 17+ and Maven.
 
-```bash
-# copy config and fill in your Reddit app credentials
-cp src/main/resources/application-example.yml src/main/resources/application.yml
+Register a script app at https://www.reddit.com/prefs/apps and set env vars:
 
-# build & run
+```bash
+export REDDIT_CLIENT_ID=your_client_id
+export REDDIT_CLIENT_SECRET=your_client_secret
+export REDDIT_USERNAME=your_username
+export REDDIT_PASSWORD=your_password
+
 mvn clean package
 java -jar target/reddit-feed-reader-1.0.0.jar
 ```
-
-Register a script app at https://www.reddit.com/prefs/apps
 
 ## Endpoints
 

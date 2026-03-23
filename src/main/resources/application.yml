@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: reddit-feed-reader
+
+reddit:
+  client-id: ${REDDIT_CLIENT_ID}
+  client-secret: ${REDDIT_CLIENT_SECRET}
+  username: ${REDDIT_USERNAME}
+  password: ${REDDIT_PASSWORD}
+  user-agent: "desktop:reddit-feed-reader:v1.0.0 (by /u/${REDDIT_USERNAME})"
+  subreddits:
+    - wallstreetbets
+    - stocks
+    - investing
+    - cryptocurrency
+    - bitcoin
+    - ethtrader

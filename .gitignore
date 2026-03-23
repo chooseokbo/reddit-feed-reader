@@ -13,9 +13,6 @@ build/
 .classpath
 .settings/
 
-# Credentials - NEVER commit these
-application.yml
-application-local.yml
 *.env
 .env
 
