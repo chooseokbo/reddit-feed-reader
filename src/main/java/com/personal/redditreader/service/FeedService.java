@@ -36,19 +36,39 @@ public class FeedService {
         posts.clear();
         posts.addAll(fetched);
         log.info("Loaded {} posts", posts.size());
-        return getPosts();
+        return getPosts("new", 0);
     }
 
-    public List<RedditPost> getPosts() {
-        return posts.stream()
-                .sorted(Comparator.comparing(RedditPost::getCreatedUtc, Comparator.nullsLast(Comparator.reverseOrder())))
-                .toList();
+    public List<RedditPost> getPosts(String sort, int minScore) {
+        var stream = posts.stream();
+
+        if (minScore > 0) {
+            stream = stream.filter(p -> p.getScore() >= minScore);
+        }
+
+        Comparator<RedditPost> comparator = switch (sort) {
+            case "score" -> Comparator.comparingInt(RedditPost::getScore).reversed();
+            case "comments" -> Comparator.comparingInt(RedditPost::getNumComments).reversed();
+            default -> Comparator.comparing(RedditPost::getCreatedUtc, Comparator.nullsLast(Comparator.reverseOrder()));
+        };
+
+        return stream.sorted(comparator).toList();
     }
 
-    public List<RedditPost> getPostsBySubreddit(String subreddit) {
-        return posts.stream()
-                .filter(p -> subreddit.equalsIgnoreCase(p.getSubreddit()))
-                .sorted(Comparator.comparing(RedditPost::getCreatedUtc, Comparator.nullsLast(Comparator.reverseOrder())))
-                .toList();
+    public List<RedditPost> getPostsBySubreddit(String subreddit, String sort, int minScore) {
+        var stream = posts.stream()
+                .filter(p -> subreddit.equalsIgnoreCase(p.getSubreddit()));
+
+        if (minScore > 0) {
+            stream = stream.filter(p -> p.getScore() >= minScore);
+        }
+
+        Comparator<RedditPost> comparator = switch (sort) {
+            case "score" -> Comparator.comparingInt(RedditPost::getScore).reversed();
+            case "comments" -> Comparator.comparingInt(RedditPost::getNumComments).reversed();
+            default -> Comparator.comparing(RedditPost::getCreatedUtc, Comparator.nullsLast(Comparator.reverseOrder()));
+        };
+
+        return stream.sorted(comparator).toList();
     }
 }

@@ -28,10 +28,12 @@ java -jar target/reddit-feed-reader-1.0.0.jar
 ## Endpoints
 
 ```
-POST /api/feed/refresh           - fetch latest posts
-GET  /api/feed/posts             - get all posts
-GET  /api/feed/posts/{subreddit} - get posts by subreddit
+POST /api/feed/refresh                          - fetch latest posts
+GET  /api/feed/posts?sort=score&minScore=100    - get all posts, sorted/filtered
+GET  /api/feed/posts/{subreddit}                - get posts by subreddit
 ```
+
+`sort` options: `new` (default), `score`, `comments`
 
 ## Subreddits
 

@@ -22,12 +22,17 @@ public class FeedController {
     }
 
     @GetMapping("/posts")
-    public List<RedditPost> posts() {
-        return feedService.getPosts();
+    public List<RedditPost> posts(
+            @RequestParam(defaultValue = "new") String sort,
+            @RequestParam(defaultValue = "0") int minScore) {
+        return feedService.getPosts(sort, minScore);
     }
 
     @GetMapping("/posts/{subreddit}")
-    public List<RedditPost> postsBySub(@PathVariable String subreddit) {
-        return feedService.getPostsBySubreddit(subreddit);
+    public List<RedditPost> postsBySub(
+            @PathVariable String subreddit,
+            @RequestParam(defaultValue = "new") String sort,
+            @RequestParam(defaultValue = "0") int minScore) {
+        return feedService.getPostsBySubreddit(subreddit, sort, minScore);
     }
 }
